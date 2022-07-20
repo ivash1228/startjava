@@ -23,7 +23,7 @@ public class IfElseStatementTheme {
         if (height < 1.8) {
             System.out.println("A person is tall");
         } else {
-        System.out.println("A person is of average height");
+            System.out.println("A person is of average height");
         }
 
         char firstLetterName = name.charAt(0);
@@ -40,9 +40,9 @@ public class IfElseStatementTheme {
         int num1 = 5;
         int num2 = 29;
         if (num1 > num2) {
-            System.out.printf("Mаксимальное число: %d, Mинимальное число: %d\n", num1, num2);
+            System.out.printf("максимальное число: %d, минимальное число: %d\n", num1, num2);
         } else {
-            System.out.printf("Mаксимальное число: %d, Mинимальное число: %d\n", num2, num1);
+            System.out.printf("максимальное число: %d, минимальное число: %d\n", num2, num1);
         }
 
         System.out.println("\n3. Работа с числом\n");
@@ -64,38 +64,38 @@ public class IfElseStatementTheme {
         }
 
         System.out.println("\n4. Поиск одинаковых цифр в числах\n");
-        num1 = 234;
-        num2 = 335;
+        num1 = 534;
+        num2 = 534;
         int digit = 0;
         int place = 0;
         if(num1 % 10 == num2 % 10) {
             digit = num1 % 10;
             place = 3;
-        } else if ((num1 / 10) % 10 == (num2 / 10) % 10){
+            System.out.printf("We have two numbers: %d and %d. They have a common digit %d in a %d place\n", num1, num2, digit, place);
+        }
+        if ((num1 / 10) % 10 == (num2 / 10) % 10) {
             digit = (num1 / 10) % 10;
             place = 2;
-        } else if (num1 / 100 == num2 / 100) {
+            System.out.printf("We have two numbers: %d and %d. They have a common digit %d in a %d place\n", num1, num2, digit, place);
+        }
+        if (num1 / 100 == num2 / 100) {
             digit = num1 / 100;
             place = 1;
-        }
-        if (place != 0) {
             System.out.printf("We have two numbers: %d and %d. They have a common digit %d in a %d place\n", num1, num2, digit, place);
         }
 
         System.out.println("\n5. Определение буквы, числа или символа по их коду\n");
 
         char code = '\u0057';
-        String number;
-        if (48 <= code && code <= 57) {
-            number = "Integer";
-        } else if (65 <= code && code <= 90) {
-            number = "Uppercase Letter";
-        } else if (97 <= code && code <= 122) {
-            number = "Lowercase Letter";
+        if ('0' <= code && code <= '9') {
+            System.out.printf("%c %s\n", code, "Integer");
+        } else if ('A' <= code && code <= 'Z') {
+            System.out.printf("%c %s\n", code, "Uppercase Letter");
+        } else if ('a' <= code && code <= 'z') {
+            System.out.printf("%c %s\n", code, "Lowercase Letter");
         } else {
-            number = "Special Character";
+            System.out.printf("%c %s\n", code, "Special Character");
         }
-        System.out.println(code + " " + number);
 
         System.out.println("\n6. Определение суммы вклада и начисленных банком %\n");
 
@@ -104,22 +104,22 @@ public class IfElseStatementTheme {
         if (depositAmount < 100000) {
             divident = (depositAmount / 100) * 5;
         } else if (depositAmount < 300000) {
-                divident = (depositAmount / 100) * 7;
+            divident = (depositAmount / 100) * 7;
         } else {
-                divident = (depositAmount / 100) * 10;
+            divident = (depositAmount / 100) * 10;
         }
-        System.out.printf("суммa вклада: %d, начисленный: %d, итоговa суммa: %d\n", depositAmount, divident, depositAmount + divident);
+        System.out.printf("сумма вклада: %d, начисленный: %d, итоговая сумма: %d\n", depositAmount, divident, depositAmount + divident);
 
         System.out.println("\n7. Определение оценки по предметам\n");
 
-        int hist = 59;
-        int progr = 91;
-        int histGrade = getScore(hist);
-        int codingGrade = getScore(progr);
-        System.out.println(histGrade + " " + "History");
+        int historyScore = 59; 
+        int codingScore = 91;
+        int historyGrade = getScore(historyScore);
+        int codingGrade = getScore(codingScore);
+        System.out.println(historyGrade + " " + "History");
         System.out.println(codingGrade + " " + "Coding");
-        System.out.println("средний балл оценок по предметам: " + (hist + progr) / 2);
-        System.out.println("средний % по предметам: " + (histGrade + codingGrade) / 2);
+        System.out.println("средний балл оценок по предметам: " + (historyScore + codingScore) / 2);
+        System.out.println("средний % по предметам: " + (historyGrade + codingGrade) / 2);
 
         System.out.println("\n8. Расчет прибыли\n");
 
@@ -127,7 +127,7 @@ public class IfElseStatementTheme {
         int sales = 13000;
         int purchasePrice = 9000;
         int oneMonth = 13000 - 9000 - 5000;
-        System.out.printf("прибыль за год: %d\n", oneMonth * 12);
+        System.out.printf("прибыль за год: %d руб.\n", oneMonth * 12);
 
         System.out.println("\n9. Подсчет количества банкнот\n");
 
@@ -148,18 +148,17 @@ public class IfElseStatementTheme {
         System.out.printf("You will withdraw $%d from your account\n", totaToWithdraw);
     }
 
-
-public static int getScore(int number) {
-            int score = 0;
-            if (number > 91) {
-                score = 5;
-            } else if (number > 73) {
-                score = 4;
-            } else if (number > 60) {
-                score = 3;
-            } else {
-                score = 2;
+    public static int getScore(int number) {
+                int score = 0;
+                if (number > 91) {
+                    score = 5;
+                } else if (number > 73) {
+                    score = 4;
+                } else if (number > 60) {
+                    score = 3;
+                } else {
+                    score = 2;
+                }
+                return score;
             }
-            return score;
-        }
 }
