@@ -5,7 +5,7 @@ public class GuessNumber {
         int playerNumber = 12;
 
         do {
-            if(compNumber > playerNumber) { 
+            if (compNumber > playerNumber) { 
                 System.out.printf("число %d больше того, что загадал компьютер\n", playerNumber);
                 playerNumber++;
             } else {
