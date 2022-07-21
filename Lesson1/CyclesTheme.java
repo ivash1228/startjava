@@ -127,5 +127,66 @@ public class CyclesTheme {
                     signCounter = lineNum;
                 }
             } while(lineNum > 0);
-      }
+
+        System.out.println("\n8. Проверка, является ли число палиндромом\n");
+
+        int srcNum = 1234321;
+        int reversedNumber = 0;
+        int temp = srcNum;
+        while (temp != 0) {
+            int remainder = temp % 10;
+            reversedNumber = reversedNumber * 10 + remainder;
+            temp /= 10;
+        }
+        if (reversedNumber == srcNum) {
+            System.out.printf("число %d является палиндромом\n", srcNum);
+        }
+
+        System.out.println("\n9. Определение, является ли число счастливым\n");
+
+        int luckyNumber = 123115;
+        int firstHalf = luckyNumber / 1000;
+        int secondHalf = luckyNumber % 1000;
+        int sumFirstHalf = 0;
+        int sumSecondHalf = 0;
+        while(firstHalf > 0 && secondHalf > 0) {
+            sumFirstHalf += firstHalf % 10;
+            sumSecondHalf += secondHalf % 10;
+            firstHalf /=  10;
+            secondHalf /= 10;
+        }
+        firstHalf = luckyNumber / 1000;
+        secondHalf = luckyNumber % 1000;
+        System.out.printf("Сумма цифр %d = %d\n", firstHalf, sumFirstHalf);
+        System.out.printf("Сумма цифр %d = %d\n", secondHalf, sumSecondHalf);
+        if (sumFirstHalf == sumSecondHalf){
+            System.out.println("число является счастливым");
+        }
+
+        System.out.println("\n 10. Вывод таблицы умножения Пифагора\n");
+
+        System.out.printf("%22s\n\n", "таблица Пифагора");
+
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 10; j++) {
+                if (i == 0 && j == 0) {
+                    System.out.print("  ");
+                } else if (i == 1) {
+                    System.out.print("---");
+                } else if (j == 1) {
+                    System.out.printf("%2c", '|');
+                } else if (i == 0) {
+                    System.out.printf("%3d", j);
+                } else if (j == 0) {
+                    System.out.printf("%2d", i);
+                }
+                else {
+                    System.out.printf("%3d", i*j);
+                }
+            } System.out.println("");
+        }
+    }
 }
+
+
+
