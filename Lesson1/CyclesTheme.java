@@ -58,13 +58,11 @@ public class CyclesTheme {
 
         int count = 0;
         for(int i = 1; i < 24; i += 2) {
-            if (count < 5) {
-                System.out.printf("%3d", i);
-                count++;
-            } else {
-                System.out.println("");
+            System.out.printf("%3d", i);
+            count++;
+            if (count == 5) {
+                System.out.println();
                 count = 0;
-                i -=2;
             }
         }
         while(count < 5) {
