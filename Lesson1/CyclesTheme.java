@@ -59,7 +59,7 @@ public class CyclesTheme {
         int count = 0;
         for(int i = 1; i < 24; i += 2) {
             if (count < 5) {
-                System.out.printf("%2d ", i);
+                System.out.printf("%3d", i);
                 count++;
             } else {
                 System.out.println("");
@@ -68,7 +68,7 @@ public class CyclesTheme {
             }
         }
         while(count < 5) {
-            System.out.printf("%2d", 0);
+            System.out.printf("%3d", 0);
             count++;
         }
 
@@ -136,22 +136,22 @@ public class CyclesTheme {
         // do {
         //     System.out.print("$");
         //     signCounter--;
-        //         if (signCounter == 0) {
-        //             lineNum++;
-        //             System.out.println("");
-        //             signCounter = lineNum;
-        //         }
-        //         if (lineNum == 3) {
-        //             do {
-        //                 signCounter--;
-        //                 System.out.print("$");
-        //                     if (signCounter == 0) {
-        //                         lineNum--;
-        //                         System.out.println("");
-        //                         signCounter = lineNum;
-        //                     }
-        //             } while (lineNum > 0);
-        //         }
+    //         if (signCounter == 0) {
+    //             lineNum++;
+    //             System.out.println("");
+    //             signCounter = lineNum;
+    //         }
+    //         if (lineNum == 3) {
+    //             do {
+    //                 signCounter--;
+    //                 System.out.print("$");
+//                     if (signCounter == 0) {
+//                         lineNum--;
+//                         System.out.println("");
+//                         signCounter = lineNum;
+//                     }
+    //             } while (lineNum > 0);
+    //         }
         // } while (lineNum > 0);
 
         System.out.println("\n8. Проверка, является ли число палиндромом\n");
