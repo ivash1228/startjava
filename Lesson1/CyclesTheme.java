@@ -36,7 +36,7 @@ public class CyclesTheme {
         } else {
             min = num2;
         }
-        for(int i = --max; i > min + 1; i--) {
+        for(int i = --max; i > min; i--) {
             System.out.print(i + " ");
         }
 
@@ -130,27 +130,6 @@ public class CyclesTheme {
                 }
             }
         } while (lineNum < 6);
-
-        // do {
-        //     System.out.print("$");
-        //     signCounter--;
-    //         if (signCounter == 0) {
-    //             lineNum++;
-    //             System.out.println("");
-    //             signCounter = lineNum;
-    //         }
-    //         if (lineNum == 3) {
-    //             do {
-    //                 signCounter--;
-    //                 System.out.print("$");
-//                     if (signCounter == 0) {
-//                         lineNum--;
-//                         System.out.println("");
-//                         signCounter = lineNum;
-//                     }
-    //             } while (lineNum > 0);
-    //         }
-        // } while (lineNum > 0);
 
         System.out.println("\n8. Проверка, является ли число палиндромом\n");
 
