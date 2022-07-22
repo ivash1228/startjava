@@ -13,7 +13,7 @@ public class CyclesTheme {
             }
         }
         System.out.printf("B промежутке [-10, 21] сумма четных чисел = %d, а нечетных = %d\n",
-            sumEven, sumOdd);
+                sumEven, sumOdd);
 
         System.out.println("\n2. Вывод чисел в интервале (min и max) в порядке убывания\n");
         int num1 = 10;
@@ -36,8 +36,8 @@ public class CyclesTheme {
         } else {
             min = num2;
         }
-        for(int i = max; i > min + 1; i--) {
-            System.out.print(i - 1 + " ");
+        for(int i = --max; i > min + 1; i--) {
+            System.out.print(i + " ");
         }
 
         System.out.println("\n\n3. Вывод реверсивного числа и суммы его цифр\n");
@@ -45,15 +45,14 @@ public class CyclesTheme {
         int srcNumber = 1234;
         int reverceSrcNumber = 0;
         int sumDigits = 0;
-        int mult = 10;
         while(srcNumber > 0) {
-            int digit = srcNumber % mult;
+            int digit = srcNumber % 10;
             sumDigits += digit;
-            srcNumber = srcNumber / mult;
-            reverceSrcNumber = reverceSrcNumber*mult + digit;
+            srcNumber /= 10;
+            reverceSrcNumber = reverceSrcNumber * 10 + digit;
         }
         System.out.printf("исходное число в обратном порядке: %d, сумма его цифр: %d\n", 
-            reverceSrcNumber, sumDigits);
+                reverceSrcNumber, sumDigits);
 
         System.out.println("\n4. Вывод чисел на консоль в несколько строк\n");
 
@@ -82,7 +81,7 @@ public class CyclesTheme {
             if(srcNumber % 10 == 1) {
                 ones++;
             }
-            srcNumber = srcNumber / 10;
+            srcNumber /= 10;
         }
         if(ones / 2 == 0) {
             evenOdd = "четное";
@@ -117,26 +116,43 @@ public class CyclesTheme {
 
         int signCounter = 1;
         int lineNum = 1;
+        int backCounter = 0;
         do {
-            System.out.print("$");
+            System.out.print("$"); 
             signCounter--;
-                if (signCounter == 0) {
-                    lineNum++;
-                    System.out.println("");
+            if (signCounter == 0) {
+                System.out.println("");
+                lineNum++;
+                if (lineNum < 4) {
                     signCounter = lineNum;
+                    backCounter = lineNum;
+                } else {
+                    signCounter = backCounter - 1;
+                    backCounter -= 1;
                 }
-                if (lineNum == 3) {
-                    do {
-                        signCounter--;
-                        System.out.print("$");
-                            if (signCounter == 0) {
-                                lineNum--;
-                                System.out.println("");
-                                signCounter = lineNum;
-                            }
-                    } while (lineNum > 0);
-                }
-        } while (lineNum > 0);
+            }
+        } while (lineNum < 6);
+
+        // do {
+        //     System.out.print("$");
+        //     signCounter--;
+        //         if (signCounter == 0) {
+        //             lineNum++;
+        //             System.out.println("");
+        //             signCounter = lineNum;
+        //         }
+        //         if (lineNum == 3) {
+        //             do {
+        //                 signCounter--;
+        //                 System.out.print("$");
+        //                     if (signCounter == 0) {
+        //                         lineNum--;
+        //                         System.out.println("");
+        //                         signCounter = lineNum;
+        //                     }
+        //             } while (lineNum > 0);
+        //         }
+        // } while (lineNum > 0);
 
         System.out.println("\n8. Проверка, является ли число палиндромом\n");
 
@@ -149,7 +165,7 @@ public class CyclesTheme {
             copySrcNum /= 10;
         }
         if (reversedNumber == srcNum) {
-            System.out.printf("число %d является палиндромом\n", srcNum);
+                System.out.printf("число %d является палиндромом\n", srcNum);
         }
 
         System.out.println("\n9. Определение, является ли число счастливым\n");
