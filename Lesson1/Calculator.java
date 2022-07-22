@@ -12,7 +12,7 @@ public class Calculator {
         if (operation.equals("+")) {
             System.out.printf("%d %s %d = %d\n", num1, operation, num2, num1 + num2);
         } 
-        if(operation.equals("-")) {
+        if (operation.equals("-")) {
             System.out.printf("%d %s %d = %d\n", num1, operation, num2, num1 - num2);
         } 
         if (operation.equals("*")) {
