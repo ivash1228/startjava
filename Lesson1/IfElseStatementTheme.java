@@ -71,17 +71,20 @@ public class IfElseStatementTheme {
         if(num1 % 10 == num2 % 10) {
             digit = num1 % 10;
             place = 3;
-            System.out.printf("We have two numbers: %d and %d. They have a common digit %d in a %d place\n", num1, num2, digit, place);
+            System.out.printf("We have two numbers: %d and %d. They have a common digit %d " + 
+                "in a %d place\n", num1, num2, digit, place);
         }
         if ((num1 / 10) % 10 == (num2 / 10) % 10) {
             digit = (num1 / 10) % 10;
             place = 2;
-            System.out.printf("We have two numbers: %d and %d. They have a common digit %d in a %d place\n", num1, num2, digit, place);
+            System.out.printf("We have two numbers: %d and %d. They have a common digit %d " + 
+                "in a %d place\n", num1, num2, digit, place);
         }
         if (num1 / 100 == num2 / 100) {
             digit = num1 / 100;
             place = 1;
-            System.out.printf("We have two numbers: %d and %d. They have a common digit %d in a %d place\n", num1, num2, digit, place);
+            System.out.printf("We have two numbers: %d and %d. They have a common digit %d " + 
+                "in a %d place\n", num1, num2, digit, place);
         }
 
         System.out.println("\n5. Определение буквы, числа или символа по их коду\n");
@@ -108,7 +111,8 @@ public class IfElseStatementTheme {
         } else {
             divident = (depositAmount / 100) * 10;
         }
-        System.out.printf("сумма вклада: %d, начисленный: %d, итоговая сумма: %d\n", depositAmount, divident, depositAmount + divident);
+        System.out.printf("сумма вклада: %d, начисленный: %d, итоговая сумма: %d\n",
+            depositAmount, divident, depositAmount + divident);
 
         System.out.println("\n7. Определение оценки по предметам\n");
 
@@ -127,7 +131,13 @@ public class IfElseStatementTheme {
         int sales = 13000;
         int purchasePrice = 9000;
         int oneMonth = 13000 - 9000 - 5000;
-        System.out.printf("прибыль за год: %d руб.\n", oneMonth * 12);
+        int total = oneMonth * 12;
+        if (total > 0) {
+            System.out.printf("прибыль за год: %c%d руб.\n", '+', total);
+        } else {
+            System.out.printf("прибыль за год: %d руб.\n", total);
+        }
+        
 
         System.out.println("\n9. Подсчет количества банкнот\n");
 
@@ -144,21 +154,22 @@ public class IfElseStatementTheme {
 
         int totaToWithdraw = (hundredDollarBill * 100) + (tenDollarBill * 10) + oneDollarBill;
 
-        System.out.printf("ATM will dispense %d $100 bills, %d $10 bills, %d $1 bills\n", hundredDollarBill, tenDollarBill, oneDollarBill);
+        System.out.printf("ATM will dispense %d $100 bills, %d $10 bills, %d $1 bills\n", 
+            hundredDollarBill, tenDollarBill, oneDollarBill);
         System.out.printf("You will withdraw $%d from your account\n", totaToWithdraw);
     }
 
     public static int getScore(int number) {
-                int score = 0;
-                if (number > 91) {
-                    score = 5;
-                } else if (number > 73) {
-                    score = 4;
-                } else if (number > 60) {
-                    score = 3;
-                } else {
-                    score = 2;
-                }
-                return score;
-            }
+        int score = 0;
+        if (number > 91) {
+            score = 5;
+        } else if (number > 73) {
+            score = 4;
+        } else if (number > 60) {
+            score = 3;
+        } else {
+            score = 2;
+        }
+        return score;
+    }
 }
