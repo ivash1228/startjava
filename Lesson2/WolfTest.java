@@ -2,7 +2,7 @@ public class WolfTest {
 
     public static void main(String[] args) {
         Wolf wolf = new Wolf();
-        wolf.sex = "Male";
+        wolf.sex = "male";
         wolf.name = "Wolf";
         wolf.weight = 500;
         wolf.age = 20;
