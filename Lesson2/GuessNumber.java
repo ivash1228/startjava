@@ -49,26 +49,26 @@ public class GuessNumber {
     public void start(Scanner scanner) {
         String yesNo = "";
         do {
-        setSecretNumber();
-        boolean result = false;
-            do {
-            System.out.println(playerOne.getName()+ ", put your number: "); 
-            playerOneSetNumber(scanner.nextInt());
-            if (isGuessed(playerOneGetNumber())) {
-                result = true;
-                break;
-            }
-            System.out.println(playerTwo.getName()+ ", put your number: "); 
-            playerTwoSetNumber(scanner.nextInt());
-            if (isGuessed(playerTwoGetNumber())) {
-                result = true;
-                break;
-            }
-            } while (!result);
-            do {
-                System.out.println("Do you want to play one more time?");
-                yesNo = scanner.next();
-            } while (!yesNo.equals("yes") && !yesNo.equals("no"));
+            setSecretNumber();
+            boolean result = false;
+                do {
+                    System.out.println(playerOne.getName()+ ", put your number: "); 
+                    playerOneSetNumber(scanner.nextInt());
+                    if (isGuessed(playerOneGetNumber())) {
+                        result = true;
+                        break;
+                    }
+                    System.out.println(playerTwo.getName()+ ", put your number: "); 
+                    playerTwoSetNumber(scanner.nextInt());
+                    if (isGuessed(playerTwoGetNumber())) {
+                        result = true;
+                        break;
+                    }
+                } while (!result);
+                do {
+                    System.out.println("Do you want to play one more time?");
+                    yesNo = scanner.next();
+                } while (!yesNo.equals("yes") && !yesNo.equals("no"));
         } while (!yesNo.equals("no"));
     }
 }
