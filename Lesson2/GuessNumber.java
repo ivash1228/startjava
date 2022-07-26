@@ -15,21 +15,20 @@ public class GuessNumber {
 
     public void start(Scanner scanner) {
         generateSecretNumber();
-        boolean result = false;
-            do {
-                System.out.println(playerOne.getName()+ ", put your number: "); 
-                playerOneSetNumber(scanner.nextInt());
-                if (isGuessed(playerOneGetNumber())) {
-                    result = true;
-                    break;
-                }
-                System.out.println(playerTwo.getName()+ ", put your number: "); 
-                playerTwoSetNumber(scanner.nextInt());
-                if (isGuessed(playerTwoGetNumber())) {
-                    result = true;
-                    break;
-                }
-            } while (!result);
+        do {
+            System.out.println(playerOne.getName()+ ", put your number: "); 
+            playerOne.setNumber(scanner.nextInt());
+            if (isGuessed(playerOne.getNumber())) {
+                System.out.println(playerOne.getName() + ", you won!");
+                break;
+            }
+            System.out.println(playerTwo.getName()+ ", put your number: "); 
+            playerTwo.setNumber(scanner.nextInt());
+            if (isGuessed(playerTwo.getNumber())) {
+                System.out.println(playerTwo.getName() + ", you won!");
+                break;
+            }
+        } while (true);
     }
 
     private void generateSecretNumber() {
@@ -37,31 +36,14 @@ public class GuessNumber {
     }
 
     private boolean isGuessed(int number) {
-    boolean result = false;
-    if (number == secretNumber) {
-        System.out.println("You won!");
-        result = true;
-    } else if (number < secretNumber) {
-        System.out.println("Your number is less.");
-    } else {
-        System.out.println("Your number is greater.");
-    }
-    return result;
-}
-
-    private void playerOneSetNumber(int number) {
-        playerOne.setNumber(number);
-    }
-
-    private void playerTwoSetNumber(int number) {
-        playerTwo.setNumber(number);
-    }
-
-    private int playerOneGetNumber() {
-        return playerOne.getNumber();
-    }
-
-    private int playerTwoGetNumber() {
-        return playerTwo.getNumber();
+        boolean result = false;
+        if (number == secretNumber) {
+            result = true;
+        } else if (number < secretNumber) {
+            System.out.println("Your number is less.");
+        } else {
+            System.out.println("Your number is greater.");
+        }
+        return result;
     }
 }

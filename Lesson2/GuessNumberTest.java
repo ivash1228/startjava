@@ -16,7 +16,6 @@ public class GuessNumberTest {
                 System.out.println("Do you want to play one more time?");
                 answer = scanner.next();
             } while (!answer.equals("yes") && !answer.equals("no"));
-
         } while (!answer.equals("no"));
     }
 }
