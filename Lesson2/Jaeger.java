@@ -40,7 +40,7 @@ public class Jaeger {
         return mark;
     }
 
-    public void setOrigin(String origin){
+    public void setOrigin(String origin) {
         this.origin = origin;
     }
 
@@ -48,7 +48,7 @@ public class Jaeger {
         return origin;
     }
 
-    public void setHeight(float height){
+    public void setHeight(float height) {
         this.height = height;
     }
 
@@ -56,7 +56,7 @@ public class Jaeger {
         return height;
     }
 
-    public void setWeight(float weight){
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
@@ -64,7 +64,7 @@ public class Jaeger {
         return weight;
     }
 
-    public void setSpeed(int speed){
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
@@ -72,7 +72,7 @@ public class Jaeger {
         return speed;
     }
 
-    public void setStrength(int strength){
+    public void setStrength(int strength) {
         this.strength = strength;
     }
 
@@ -80,7 +80,7 @@ public class Jaeger {
         return strength;
     }
 
-    public void setArmor(int armor){
+    public void setArmor(int armor) {
         this.armor = armor;
     }
 
@@ -97,8 +97,8 @@ public class Jaeger {
         System.out.println("You walked 5 steps");
     }
 
-    String destroyed() {
-        return "Robot destroyd";
+    String destroy() {
+        return "Robot destroyed";
     }
 
     void useVortexCannon() {

@@ -17,12 +17,12 @@ public class JaegerTest {
         System.out.println("First Robot: " + brawlerYukon.getModelName() + " was made in " + 
             brawlerYukon.getOrigin() + " by " + brawlerYukon.getMark());
         brawlerYukon.useVortexCannon();
-        System.out.println(brawlerYukon.destroyed());
+        System.out.println(brawlerYukon.destroy());
         brawlerYukon.setModelName("Kitty");
         System.out.println("We can rename this robot and now it is called" + 
             brawlerYukon.getModelName());
         System.out.println("Second robot: " + diabloIntercept.getModelName() + " is " + 
-            diabloIntercept.getHeight() + "feet tall");
+            diabloIntercept.getHeight() + " feet tall");
 
         if (diabloIntercept.getArmor() > brawlerYukon.getArmor()) {
             System.out.println(diabloIntercept.getModelName() + " has more armor than " + 
