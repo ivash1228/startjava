@@ -1,3 +1,9 @@
+
+
 out/
 **/*.class
 **/.DS_Store
+.AppleDouble
+.LSOverride
+.idea/
+
