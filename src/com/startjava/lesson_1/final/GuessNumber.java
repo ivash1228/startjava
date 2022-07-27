@@ -1,3 +1,5 @@
+package com.startjava.lesson_1.final;
+
 public class GuessNumber {
     
     private Player playerOne;
@@ -7,6 +9,4 @@ public class GuessNumber {
         this.playerOne = playerOne;
         this playerTwo = playerTwo;
     }
-
-
 }
