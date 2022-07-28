@@ -6,4 +6,5 @@ out/
 .AppleDouble
 .LSOverride
 .idea/
-
+**/optionsj
+**/options
