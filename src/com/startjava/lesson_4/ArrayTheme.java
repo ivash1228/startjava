@@ -14,22 +14,27 @@ public class ArrayTheme {
             int temp = numbers[i];
             numbers[i] = numbers[len];
             numbers[len] = temp;
-            len -= 1;
+            len--;
         }
         System.out.println();
         printIntArray(numbers);
 
         System.out.println("\n\n2. Вывод произведения элементов массива\n");
-        int[] nums = populateArray(10);
-        len = nums.length;
+        numbers = populateArray(10);
+        len = numbers.length;
         int product = 1;
-        for (int i = 0; i < len; i++) {
-            product = (i > 0) ? product * nums[i] : product;
-            String result = (i == 0 || i == 9) ? ("индекс числа " + nums[i] + " - " + i + "\n") :
-                    (i < len - 2 ? (nums[i] + " * ") :
-                            (nums[i] + " = " + product + "\n"));
-            System.out.print(result);
+        for (int i = 1; i < len - 1; i++) {
+            product *= numbers[i];
         }
+        String result = "";
+        for (int i = 0; i < len; i++) {
+            if (i == 0 || i == 9) {
+                System.out.println("индекс числа " + numbers[i] + " is " + i);
+            } else {
+                result = (i < 8) ? result + (numbers[i] + " * ") : result + numbers[i] + " = ";
+            }
+        }
+        System.out.println(result + product);
 
         System.out.println("\n3. Удаление элементов массива\n");
         float[] randomNums = new float[15];
@@ -38,40 +43,24 @@ public class ArrayTheme {
         for (int i = 0; i < len; i++) {
             randomNums[i] = rand.nextFloat();
         }
-        int counter = 0;
-        for (int i = 0; i < len; i++) {
-            System.out.printf("%-2.3f ", randomNums[i]);
-            counter++;
-            if (counter == 8) {
-                System.out.println();
-            }
-        }
+        printFloatArray(randomNums);
         System.out.println("\n");
         float middle = randomNums[len / 2 + 1];
-        for (int i = 0; i < len; i++) {
-            randomNums[i] = (randomNums[i] > middle) ? 0.0f : randomNums[i];
-        }
-        counter = 0;
         int zeros = 0;
         for (int i = 0; i < len; i++) {
-            System.out.printf("%-2.3f ", randomNums[i]);
-            counter++;
-            if (counter == 8) {
-                System.out.println();
-            }
-            if (randomNums[i] == 0) {
+            if (randomNums[i] > middle) {
+                randomNums[i] = 0.0f;
                 zeros++;
             }
         }
+        printFloatArray(randomNums);
         System.out.println("\nколичество обнуленных ячеек: " + zeros);
 
-        System.out.println("\n4. Вывод элементов массива лесенкой в обратном порядке\n");
+        System.out.println("\n4. Вывод элементов массива лесенкой в обратном порядке");
         char[] letters = new char[26];
         len = letters.length;
-        char capitalA = 65;
         for (int i = 0; i < len; i++) {
-            letters[i] = capitalA;
-            capitalA++;
+            letters[i] = (char) (65 + i);
         }
         for (int i = len; i >= 0; i--) {
             for (int j = len - 1; j >= i; j--) {
@@ -80,52 +69,38 @@ public class ArrayTheme {
             System.out.println();
         }
 
-        System.out.println("\n5. Генерация уникальных чисел");
-        int[] randNumbers = new int[30];
-        len = randNumbers.length;
-        int num;
-        counter = 0;
+        System.out.println("\n5. Генерация уникальных чисел\n");
+        numbers = new int[30];
+        len = numbers.length;
+        int counter = 0;
         while (counter <=30) {
+            int num;
             num = (int) (Math.random() * (100 - 60)) + 60;
             for (int i = 0; i < len; i++) {
-                if(num == randNumbers[i]) {
+                if(num == numbers[i]) {
                     break;
-                } else if (randNumbers[i] == 0  || counter == 30) {
-                    randNumbers[i] = num;
+                } else if (numbers[i] == 0  || counter == 30) {
+                    numbers[i] = num;
                     counter++;
                     break;
-                } else continue;
+                }
             }
         }
         for(int i = 0; i < len; i++) {
             for(int j = 0; j < len; j++) {
-                if(randNumbers[i] < randNumbers[j]) {
-                    int temp = randNumbers[i];
-                    randNumbers[i] = randNumbers[j];
-                    randNumbers[j] = temp;
+                if(numbers[i] < numbers[j]) {
+                    int temp = numbers[i];
+                    numbers[i] = numbers[j];
+                    numbers[j] = temp;
                 }
             }
         }
         for(int i = 1; i < len + 1; i++) {
-            System.out.print(randNumbers[i-1] + " ");
+            System.out.print(numbers[i-1] + " ");
             if(i % 10 == 0) {
                 System.out.println();
             }
         }
-        //            for (int i = 0; i < len; i++) {
-//                boolean isPresent;
-//                do {
-//                    isPresent = false;
-//                    num = (int) (Math.random() * (100 - 60)) + 60;
-//                    for (int j = 0; j < i; j++) {
-//                        if (num == randNumbers[j]) {
-//                            isPresent = true;
-//                            break;
-//                        }
-//                    }
-//                } while (isPresent);
-//                randNumbers[i] = num;
-//            }
 
         System.out.println("\n6. Сдвиг элементов массива\n");
 
@@ -151,6 +126,17 @@ public class ArrayTheme {
     private static void printIntArray(int[] numbers) {
         for(int num : numbers) {
             System.out.printf("%d ", num);
+        }
+    }
+
+    private static void printFloatArray(float[] arr) {
+        int counter = 0;
+        for (int i = 0; i < arr.length; i++) {
+            System.out.printf("%-2.3f ", arr[i]);
+            counter++;
+            if (counter == 8) {
+                System.out.println();
+            }
         }
     }
 
