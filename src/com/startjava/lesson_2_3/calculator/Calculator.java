@@ -2,41 +2,18 @@ package com.startjava.lesson_2_3.calculator;
 
 public class Calculator {
     
-    public void calculate(char operation, int num1, int num2) {
-        int result = 0;
-        switch(operation) {
-            case '+' :
-                result = num1 + num2;
-                break;
-            case '-' :
-                result =  num1 - num2;
-                break;
-            case '*' :
-                result =  num1 * num2;
-                break;
-            case '/' :
-                if (num2 != 0) {
-                    result =  num1 / num2;
-                }
-                break;
-            case '^' :
-                result = pow(num1, num2);
-                break;
-            case '%' :
-                result =  num1 % num2;
-                break;
-            default:
-                System.out.println("Unknown operation");
-        }
-        System.out.printf("%d %s %d = %d\n", num1, operation, num2, result);
-    }
-
-    private int pow(int num, int power) {
-        int result = 1;
-        while (power > 0) {
-            result *= num;
-            power--;
-        }
+    public static int calculate(int num1, char operation, int num2) {
+        int result =
+            switch(operation) {
+                case '+' -> Math.addExact(num1, num2);
+                case '-' -> Math.subtractExact(num1, num2);
+                case '*'  -> Math.multiplyExact(num1, num2);
+                case '/' -> Math.floorDiv(num1, num2);
+                case '^'  -> (int) Math.pow(num1, num2);
+                case '%' -> Math.floorMod(num1, num2);
+                default -> throw new IllegalStateException("Unexpected value: " + operation);
+            };
         return result;
     }
+
 }
