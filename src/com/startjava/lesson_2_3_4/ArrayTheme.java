@@ -1,4 +1,4 @@
-package com.startjava.lesson_4;
+package com.startjava.lesson_2_3_4;
 
 import java.util.Random;
 
@@ -74,12 +74,12 @@ public class ArrayTheme {
         len = numbers.length;
         int counter = 0;
         while (counter <=30) {
-            int num;
-            num = (int) (Math.random() * (100 - 60)) + 60;
+            int num = (int) (Math.random() * (100 - 60)) + 60;
             for (int i = 0; i < len; i++) {
                 if(num == numbers[i]) {
                     break;
-                } else if (numbers[i] == 0  || counter == 30) {
+                }
+                if (numbers[i] == 0 || counter == 30) {
                     numbers[i] = num;
                     counter++;
                     break;
@@ -96,7 +96,7 @@ public class ArrayTheme {
             }
         }
         for(int i = 1; i < len + 1; i++) {
-            System.out.print(numbers[i-1] + " ");
+            System.out.print(numbers[i - 1] + " ");
             if(i % 10 == 0) {
                 System.out.println();
             }
