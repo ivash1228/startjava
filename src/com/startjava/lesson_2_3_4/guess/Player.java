@@ -17,9 +17,16 @@ public class Player {
         return name;
     }
 
-    public void addNumber(int index, int number) {
-        numbers[index] = number;
-        increaseCounter();
+    public boolean addNumber(int number) {
+        if (number > 100 || number < 0 ) {
+            System.out.println("You put invalid number, now it is next player's turn");
+            countAttempts++;
+            return false;
+        } else {
+            numbers[countAttempts] = number;
+            countAttempts++;
+            return true;
+        }
     }
 
     public int[] getNumbers() {
@@ -30,12 +37,12 @@ public class Player {
         return countAttempts;
     }
 
-    public void increaseCounter() {
-         countAttempts++;
+    public void resetNumbers() {
+        Arrays.fill(numbers,0, countAttempts, 0);
+        countAttempts = 0;
     }
 
-    public void resetNumbers() {
-        Arrays.fill(numbers,0, countAttempts,0);
-        countAttempts = 0;
+    public int getLastNumber() {
+        return numbers[countAttempts - 1];
     }
 }

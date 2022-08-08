@@ -1,78 +1,93 @@
 package com.startjava.lesson_2_3_4.guess;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class GuessNumber {
-    
-    public Player playerOne;
-    public Player playerTwo;
+
+    public Player[] players = new Player[3];
     private int secretNumber;
 
-    public GuessNumber(Player playerOne, Player playerTwo) {
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
+    public GuessNumber(Player playerOne, Player playerTwo, Player playerThree) {
+        players[0] = playerOne;
+        players[1] = playerTwo;
+        players[2] = playerThree;
     }
 
     public void start(Scanner scanner) {
         generateSecretNumber();
-        do {
-            if (playerOne.getCountAttempts() < 10) {
-                inputNumber(playerOne, scanner);
-                if (isGuessed(playerOne)) {
-                    successMessage(playerOne);
-                    break;
+        System.out.println("у каждого игрока по 10 попыток");
+        OUTER_LOOP:
+        while ((players[0].getCountAttempts() < 10
+                && players[1].getCountAttempts() < 10
+                && players[2].getCountAttempts() < 10)) {
+                    for (int i = 0; i < players.length; i++) {
+                        if (inputNumber(players[i], scanner)) {
+                            if (isGuessed(players[i])) {
+                                returnSuccessMessage(players[i]);
+                                break OUTER_LOOP;
+                            }
+                        }
+                    }
                 }
-            } else {
-                System.out.printf("У %s закончились попытки\n", playerOne.getName());
-                break;
+        for (Player player : players) {
+            if(player.getCountAttempts() == 10) {
+                System.out.printf("У %s закончились попытки\n", player.getName());
             }
-            inputNumber(playerTwo, scanner);
-            if (isGuessed(playerTwo)) {
-                successMessage(playerTwo);
-                break;
-            }
-        } while (true);
-        printPlayerNumbers(playerOne);
-        printPlayerNumbers(playerTwo);
-        playerOne.resetNumbers();
-        playerTwo.resetNumbers();
+            printPlayerNumbers(player);
+            player.resetNumbers();
+        }
     }
 
+
+//            if (playerTwo.getCountAttempts() < 10) {
+//                inputNumber(playerTwo, scanner);
+//                if (isGuessed(playerTwo)) {
+//                    returnSuccessMessage(playerTwo);
+//                    break;
+//                }
+//            } else {
+//                System.out.printf("У %s закончились попытки\n", playerTwo.getName());
+//                break;
+//            }
+
+
+    public void assignOrder() {
+        Random r = new Random();
+        for (int i = players.length - 1; i > 0; i--) {
+            int j = r.nextInt(i+1);
+            Player temp = players[i];
+            players[i] = players[j];
+            players[j] = temp;
+        }
+    }
 
     private void generateSecretNumber() {
         secretNumber = new Random().nextInt(10) + 1;
     }
 
-    private void inputNumber(Player player, Scanner scanner) {
+    private boolean inputNumber(Player player, Scanner scanner) {
         System.out.println(player.getName() + ", put your number: ");
-        player.addNumber(player.getCountAttempts(), scanner.nextInt());
+        return player.addNumber(scanner.nextInt());
     }
 
     private boolean isGuessed(Player player) {
-        int playerNumber = player.getNumbers()[player.getCountAttempts() - 1];
-
-        if (playerNumber == secretNumber) {
+        if (player.getLastNumber() == secretNumber) {
             return true;
         }
-        if (playerNumber < secretNumber) {
-            System.out.println("Your number is less.");
-        } else {
-            System.out.println("Your number is greater.");
-        }
+        System.out.print("Your number is ");
+        System.out.println((player.getLastNumber() < secretNumber) ? "less" : "greater");
         return false;
     }
 
-    private void successMessage(Player player) {
+    private void returnSuccessMessage(Player player) {
         System.out.printf("Игрок %s угадал число %d с %d попытки\n",
                 player.getName(), secretNumber, player.getCountAttempts());
     }
 
     private void printPlayerNumbers(Player player) {
-        int[] numbers = player.getNumbers();
-        for (int num : numbers) {
-            System.out.print(num + " ");
+        for (int number : player.getNumbers()) {
+            System.out.print(number + " ");
         }
         System.out.println();
     }
