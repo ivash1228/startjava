@@ -4,25 +4,19 @@ import java.util.Scanner;
 
 public class Calculator {
     
-    public static String calculate(String str) {
-        String[] input = str.split(" ");
-        int firstOperand = checkOperand(input[0]);
-        char operationSign = (input[1]).charAt(0);
-        int secondOperand = checkOperand(input[2]);
-        return switch(operationSign) {
-            case '+' -> " " + firstOperand + " " + operationSign + " " + secondOperand
-                    + " = " + Math.addExact(firstOperand, secondOperand);
-            case '-' -> " " + firstOperand + " " + operationSign + " " + secondOperand
-                    + " = " + Math.subtractExact(firstOperand, secondOperand);
-            case '*'  -> " " + firstOperand + " " + operationSign + " " + secondOperand
-                    + " = " + Math.multiplyExact(firstOperand, secondOperand);
-            case '/' -> " " + firstOperand + " " + operationSign + " " + secondOperand
-                    + " = " + Math.floorDiv(firstOperand, secondOperand);
-            case '^'  -> " " + firstOperand + " " + operationSign + " " + secondOperand
-                    + " = " + Math.pow(firstOperand, secondOperand);
-            case '%' -> " " + firstOperand + " " + operationSign + " " + secondOperand
-                    + " = " + Math.floorMod(firstOperand, secondOperand);
-            default -> throw new IllegalStateException("Unexpected value: " + operationSign);
+    public static int calculate(String expression) {
+        String[] partsExpression = expression.split(" ");
+        int a = checkOperand(partsExpression[0]);
+        char sign = (partsExpression[1]).charAt(0);
+        int b = checkOperand(partsExpression[2]);
+        return switch(sign) {
+            case '+' -> Math.addExact(a, b);
+            case '-' -> Math.subtractExact(a, b);
+            case '*'  -> Math.multiplyExact(a, b);
+            case '/' -> Math.floorDiv(a, b);
+            case '^'  -> (int) Math.pow(a, b);
+            case '%' -> Math.floorMod(a, b);
+            default -> throw new IllegalStateException("Unexpected value: " + sign);
         };
     }
 

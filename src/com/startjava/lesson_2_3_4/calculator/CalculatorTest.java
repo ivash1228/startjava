@@ -7,22 +7,27 @@ public class CalculatorTest {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String yesNo = "";
+        String answer = "yes";
 
         do {
-            System.out.println("Введите математическое выражение: ");
-            String input = scanner.nextLine();
-            try {
-                System.out.println(Calculator.calculate(input));
-            } catch (IllegalStateException e) {
-                System.out.println("You put incorrect operation sign");
-            } catch (NumberFormatException e) {
-                System.out.println("You put other sign instead of number");
+            if (answer.equals("yes")){
+                System.out.println("Введите математическое выражение: ");
+                String expression = scanner.nextLine();
+                try {
+                    int result = Calculator.calculate(expression);
+                    printResult(expression, result);
+                } catch (IllegalStateException e) {
+                    System.out.println("You put incorrect operation sign");
+                } catch (NumberFormatException e) {
+                    System.out.println("You put other sign instead of number");
+                }
             }
-            do {
-                System.out.println("Хотите продолжить вычисления? ");
-                yesNo = scanner.nextLine();
-            } while (!yesNo.equals("yes") && !yesNo.equals("no"));
-        } while (!yesNo.equals("no"));
+            System.out.println("Хотите продолжить вычисления? ");
+            answer = scanner.nextLine();
+        } while (!answer.equals("no"));
+    }
+
+    public static void printResult(String expression, int result){
+        System.out.println(expression + " = " + result);
     }
 }
