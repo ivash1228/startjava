@@ -8,11 +8,11 @@ public class BookTest {
         Bookshelf shelf = new Bookshelf();
         Scanner scanner = new Scanner(System.in);
         do {
-            BookTest.visualizeShelf(shelf.getAllBooks());
+            visualizeShelf(shelf.getAllBooks());
             showMenu();
             System.out.println("Choose from menu");
-            shelf.getFromMenu(scanner.nextInt());
-            BookTest.visualizeShelf(shelf.getAllBooks());
+            getFromMenu(scanner.nextInt(), shelf);
+            visualizeShelf(shelf.getAllBooks());
             System.out.println("Do you want something else?");
             } while (checkResponse(scanner));
     }
@@ -40,6 +40,16 @@ public class BookTest {
                5. Get free space QTY
                 """;
         System.out.println(name);
+    }
+
+    public static void getFromMenu(int num, Bookshelf bookshelf) {
+        switch(num) {
+            case 1 -> bookshelf.addBook();
+            case 2 -> bookshelf.getBook();
+            case 3 -> bookshelf.giveAwayAllBooks();
+            case 4 -> bookshelf.getBooksQuantity();
+            case 5 -> bookshelf.getFreeSpace();
+        }
     }
 
     public static boolean checkResponse(Scanner scanner) {

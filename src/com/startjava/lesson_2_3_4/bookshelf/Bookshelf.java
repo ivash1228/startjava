@@ -12,15 +12,7 @@ public class Bookshelf {
         books = new Book[10];
     }
 
-    public void getFromMenu(int num) {
-        switch(num) {
-            case 1 -> addBook();
-            case 2 -> getBook();
-            case 3 -> giveAwayAllBooks();
-            case 4 -> getBooksQuantity();
-            case 5 -> getFreeSpace();
-        }
-    }
+
 
     public void addBook() {
         books[booksCounter] = setBookFromInput();
