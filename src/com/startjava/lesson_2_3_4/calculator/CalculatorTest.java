@@ -10,24 +10,20 @@ public class CalculatorTest {
         String answer = "yes";
 
         do {
-            if (answer.equals("yes")){
+            if (answer.equals("yes")) {
                 System.out.println("Введите математическое выражение: ");
                 String expression = scanner.nextLine();
                 try {
                     int result = Calculator.calculate(expression);
-                    printResult(expression, result);
-                } catch (IllegalStateException e) {
-                    System.out.println("You put incorrect operation sign");
+                    System.out.println(expression + " = " + result);
                 } catch (NumberFormatException e) {
                     System.out.println("You put other sign instead of number");
+                } catch (IllegalStateException e) {
+                System.out.println("You put incorrect operation sign");
                 }
             }
             System.out.println("Хотите продолжить вычисления? ");
             answer = scanner.nextLine();
         } while (!answer.equals("no"));
-    }
-
-    public static void printResult(String expression, int result){
-        System.out.println(expression + " = " + result);
     }
 }

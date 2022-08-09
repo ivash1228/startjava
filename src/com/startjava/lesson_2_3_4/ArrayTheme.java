@@ -103,8 +103,6 @@ public class ArrayTheme {
 
         String[] srcArr = {"", "AA", "", "BBB", "CC", "D", "", "E", "FF", "G", ""};
         int newArrLength = 0;
-
-        //find a destArr length
         for(int i = 0; i < srcArr.length; i++) {
             if(srcArr[i].isEmpty()) {
                 continue;

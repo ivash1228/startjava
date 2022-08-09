@@ -22,9 +22,9 @@ public class Calculator {
 
     private static int checkOperand(String operand) {
         int validOperand = Integer.parseInt(operand);
+        Scanner sc = new Scanner(System.in);
         while (validOperand < 0 || validOperand % 1 != 0) {
             System.out.println(operand + " не удовлетворяет условиям, введите корректное значение");
-            Scanner sc = new Scanner(System.in);
             validOperand = Integer.parseInt(sc.nextLine());
         }
         return validOperand;
