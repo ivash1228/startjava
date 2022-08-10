@@ -6,21 +6,19 @@ import java.util.Scanner;
 public class Bookshelf {
 
     private Book[] books;
-    private int booksCounter;
+    private int countBooks;
 
     public Bookshelf() {
         books = new Book[10];
     }
 
-
-
     public void addBook() {
-        books[booksCounter] = setBookFromInput();
-        booksCounter++;
+        books[countBooks] = setBook();
+        countBooks++;
     }
 
-    public void getBook() {
-        Book desiredBook = setBookFromInput();
+    public void giveawayBook() {
+        Book desiredBook = setBook();
         for(int i = 0; i < books.length; i++) {
             if (books[i] == null) {
                 break;
@@ -28,49 +26,58 @@ public class Bookshelf {
             if (books[i].getAuthor().equals(desiredBook.getAuthor())
                     && books[i].getTitle().equals(desiredBook.getTitle())
                     && books[i].getYear().equals(desiredBook.getYear())) {
-                removeBook(i);
+                moveBooks(i);
                 System.out.println("Get your book");
                 break;
             }
         } System.out.println("Book is not on the shelf");
     }
 
-    public void removeBook(int bookSpot){
-        books[bookSpot] = null;
-        int srcPos = bookSpot + 1;
-        System.arraycopy(books, srcPos, books, bookSpot, books.length - 1 - bookSpot);
-        booksCounter--;
+    private void moveBooks(int position) {
+        books[position] = null;
+        Book[] copy = getAllBooks();
+        int srcPos = 0;
+        int destPos = 0;
+        int elementNums = 0;
+
+        for(int i = 0; i < copy.length; i++) {
+            if (copy[i] == null) {
+                srcPos++;
+                continue;
+            } else {
+                while (copy[i] != null) {
+                    elementNums++;
+                    i++;
+                }
+                System.arraycopy(copy, srcPos, books, destPos, elementNums);
+                countBooks--;
+            }
+        }
     }
 
     public Book[] getAllBooks() {
-        return books;
+        return Arrays.copyOf(books, books.length);
     }
 
-    public void giveAwayAllBooks() {
+    public void clearShelf() {
         Arrays.fill(books, null);
     }
 
-    public void getBooksQuantity() {
-        System.out.println("There are " + booksCounter + " on the shelf");
+    public void showBooksQuantity() {
+        System.out.println("There are " + countBooks + " on the shelf");
     }
 
-    public void getFreeSpace() {
-        System.out.println("There are " + (books.length - booksCounter) + "spaces left");
+    public void showFreeSpace() {
+        System.out.println("There are " + (books.length - countBooks) + "spaces left");
     }
 
-    public Book setBookFromInput() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Put author");
-        String author = scanner.nextLine();
-        System.out.println("Put title");
-        String title = scanner.nextLine();
-        System.out.println("Put year");
-        String year = scanner.nextLine().trim();
-        while (!year.matches("[0-9][0-9][0-9][0-9]")) {
-            System.out.println("Year can be only 4 digit number");
-            System.out.println("Put year");
-            year = scanner.nextLine().trim();
-        }
-        return new Book(author, title, year);
+    private Book setBook() {
+        String info[] = BookTest.putBookInfoFromInput();
+        return new Book(info[0], info[1], info[2]);
     }
+
+    public void terminate() {
+        System.exit(0);
+    }
+
 }

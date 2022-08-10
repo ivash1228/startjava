@@ -8,16 +8,15 @@ public class BookTest {
         Bookshelf shelf = new Bookshelf();
         Scanner scanner = new Scanner(System.in);
         do {
-            visualizeShelf(shelf.getAllBooks());
             showMenu();
-            System.out.println("Choose from menu");
-            getFromMenu(scanner.nextInt(), shelf);
+            System.out.println("Choose from menu: ");
+            chooseFromMenu(scanner.nextInt(), shelf);
             visualizeShelf(shelf.getAllBooks());
-            System.out.println("Do you want something else?");
-            } while (checkResponse(scanner));
+            System.out.println("Do you want something else? [y/n]");
+        } while (checkResponse(scanner));
     }
 
-    public static void visualizeShelf(Book[] books) {
+    private static void visualizeShelf(Book[] books) {
         for(int i = 0; i < 10; i++) {
             if (books[i] == null) {
                 System.out.print("[]");
@@ -31,36 +30,55 @@ public class BookTest {
         }
     }
 
-    public static void showMenu() {
-        String name = """
+    private static void showMenu() {
+        System.out.println("""
                1. Add book
                2. Get Book
                3. Get all books
                4. Get books QTY
                5. Get free space QTY
-                """;
-        System.out.println(name);
+               6. Terminate the program
+               """);
     }
 
-    public static void getFromMenu(int num, Bookshelf bookshelf) {
+    private static void chooseFromMenu(int num, Bookshelf bookshelf) {
+
         switch(num) {
             case 1 -> bookshelf.addBook();
-            case 2 -> bookshelf.getBook();
-            case 3 -> bookshelf.giveAwayAllBooks();
-            case 4 -> bookshelf.getBooksQuantity();
-            case 5 -> bookshelf.getFreeSpace();
+            case 2 -> bookshelf.giveawayBook();
+            case 3 -> bookshelf.clearShelf();
+            case 4 -> bookshelf.showBooksQuantity();
+            case 5 -> bookshelf.showFreeSpace();
+            case 6 -> bookshelf.terminate();
         }
     }
 
-    public static boolean checkResponse(Scanner scanner) {
-        scanner.nextLine();
-        String input = scanner.nextLine();
-        if (input.equals("yes")) {
+    private static boolean checkResponse(Scanner scanner) {
+        String input = scanner.next();
+        if (input.equals("y")) {
             return true;
-        } else if (input.equals("no")) return false;
+        } else if (input.equals("n")) return false;
         else {
-            System.out.println("Your response is incorrect, put yes or no");
+            System.out.println("Your response is incorrect, put y or n");
             return checkResponse(scanner);
         }
+    }
+
+    public static String[] putBookInfoFromInput() {
+        String[] bookInfo = new String[3];
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Put author");
+        bookInfo[0] = scanner.nextLine();
+        System.out.println("Put title");
+        bookInfo[1] = scanner.nextLine();
+        System.out.println("Put year");
+        String year = scanner.nextLine().trim();
+        while (!year.matches("[0-9][0-9][0-9][0-9]")) {
+            System.out.println("Year can be only 4 digit number");
+            System.out.println("Put year");
+            year = scanner.next().trim();
+        }
+        bookInfo[2] = year;
+        return bookInfo;
     }
 }
