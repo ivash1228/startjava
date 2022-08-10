@@ -19,7 +19,7 @@ public class CalculatorTest {
                 } catch (NumberFormatException e) {
                     System.out.println("You put other sign instead of number");
                 } catch (IllegalStateException e) {
-                System.out.println("You put incorrect operation sign");
+                    System.out.println("You put incorrect operation sign");
                 }
             }
             System.out.println("Хотите продолжить вычисления? ");
