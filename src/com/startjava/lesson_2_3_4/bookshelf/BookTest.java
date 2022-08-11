@@ -1,5 +1,7 @@
 package com.startjava.lesson_2_3_4.bookshelf;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BookTest {
@@ -10,10 +12,36 @@ public class BookTest {
         do {
             showMenu();
             System.out.println("Choose from menu: ");
-            chooseFromMenu(scanner.nextInt(), shelf);
+            try {
+                chooseMenuItem(scanner.nextInt(), shelf);
+            } catch(InputMismatchException e) {
+                System.out.println("Your input is incorrect");
+                scanner.next();
+            }
             visualizeShelf(shelf.getAllBooks());
-            System.out.println("Do you want something else? [y/n]");
-        } while (checkResponse(scanner));
+        } while(true);
+    }
+
+    private static void showMenu() {
+        System.out.println("""
+               1. Add book
+               2. Get Book
+               3. Get all books
+               4. Get books QTY
+               5. Get free space QTY
+               6. Terminate the program
+               """);
+    }
+
+    private static void chooseMenuItem(int num, Bookshelf bookshelf) {
+        switch(num) {
+            case 1 -> bookshelf.addBook(requestBook());
+            case 2 -> bookshelf.giveawayBook(requestBook());
+            case 3 -> bookshelf.clearShelf();
+            case 4 -> bookshelf.showBooksQuantity();
+            case 5 -> bookshelf.showFreeSpace();
+            case 6 -> System.exit(0);
+        }
     }
 
     private static void visualizeShelf(Book[] books) {
@@ -30,47 +58,13 @@ public class BookTest {
         }
     }
 
-    private static void showMenu() {
-        System.out.println("""
-               1. Add book
-               2. Get Book
-               3. Get all books
-               4. Get books QTY
-               5. Get free space QTY
-               6. Terminate the program
-               """);
-    }
-
-    private static void chooseFromMenu(int num, Bookshelf bookshelf) {
-
-        switch(num) {
-            case 1 -> bookshelf.addBook();
-            case 2 -> bookshelf.giveawayBook();
-            case 3 -> bookshelf.clearShelf();
-            case 4 -> bookshelf.showBooksQuantity();
-            case 5 -> bookshelf.showFreeSpace();
-            case 6 -> bookshelf.terminate();
-        }
-    }
-
-    private static boolean checkResponse(Scanner scanner) {
-        String input = scanner.next();
-        if (input.equals("y")) {
-            return true;
-        } else if (input.equals("n")) return false;
-        else {
-            System.out.println("Your response is incorrect, put y or n");
-            return checkResponse(scanner);
-        }
-    }
-
-    public static String[] putBookInfoFromInput() {
-        String[] bookInfo = new String[3];
+    public static Book requestBook() {
+        String[] info = new String[3];
         Scanner scanner = new Scanner(System.in);
         System.out.println("Put author");
-        bookInfo[0] = scanner.nextLine();
+        info[0] = scanner.nextLine();
         System.out.println("Put title");
-        bookInfo[1] = scanner.nextLine();
+        info[1] = scanner.nextLine();
         System.out.println("Put year");
         String year = scanner.nextLine().trim();
         while (!year.matches("[0-9][0-9][0-9][0-9]")) {
@@ -78,7 +72,7 @@ public class BookTest {
             System.out.println("Put year");
             year = scanner.next().trim();
         }
-        bookInfo[2] = year;
-        return bookInfo;
+        info[2] = year;
+        return new Book(info[0], info[1], info[2]);
     }
 }
