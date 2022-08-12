@@ -5,52 +5,48 @@ import java.util.Scanner;
 
 public class GuessNumber {
 
-    public Player[] players = new Player[3];
+    public Player[] players;
     private int secretNumber;
 
-    public GuessNumber(Player playerOne, Player playerTwo, Player playerThree) {
-        players[0] = playerOne;
-        players[1] = playerTwo;
-        players[2] = playerThree;
+    public GuessNumber(Player[] players) {
+        this.players = players;
     }
 
     public void start(Scanner scanner) {
         generateSecretNumber();
+        assignOrder();
         System.out.println("у каждого игрока по 10 попыток");
-        OUTER_LOOP:
-        while ((players[0].getCountAttempts() < 10
-                && players[1].getCountAttempts() < 10
-                && players[2].getCountAttempts() < 10)) {
-                    for (int i = 0; i < players.length; i++) {
-                        if (inputNumber(players[i], scanner)) {
-                            if (isGuessed(players[i])) {
-                                returnSuccessMessage(players[i]);
-                                break OUTER_LOOP;
-                            }
-                        }
+
+        boolean isGuessed = false;
+        while (hasAttempts() && !isGuessed) {
+            for (int i = 0; i < players.length; i++) {
+                if (inputNumber(players[i], scanner)) {
+                    if (isGuessed(players[i])) {
+                        isGuessed = true;
+                        printSuccessMessage(players[i]);
+                        break;
                     }
-                }
+                } players[i].addCountAttempts();
+            }
+        }
         for (Player player : players) {
-            if(player.getCountAttempts() == 10) {
+            if(player.getCountAttempts() == 9 && !isGuessed) {
                 System.out.printf("У %s закончились попытки\n", player.getName());
+                isGuessed = true;
             }
             printPlayerNumbers(player);
             player.resetNumbers();
         }
     }
 
-
-//            if (playerTwo.getCountAttempts() < 10) {
-//                inputNumber(playerTwo, scanner);
-//                if (isGuessed(playerTwo)) {
-//                    returnSuccessMessage(playerTwo);
-//                    break;
-//                }
-//            } else {
-//                System.out.printf("У %s закончились попытки\n", playerTwo.getName());
-//                break;
-//            }
-
+    public boolean hasAttempts() {
+        for (Player player : players) {
+            if (player.getCountAttempts() > 9) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public void assignOrder() {
         Random r = new Random();
@@ -68,7 +64,12 @@ public class GuessNumber {
 
     private boolean inputNumber(Player player, Scanner scanner) {
         System.out.println(player.getName() + ", put your number: ");
-        return player.addNumber(scanner.nextInt());
+        int guess = scanner.nextInt();
+        if (guess > 100 || guess < 0 ) {
+            System.out.println("You put invalid number, now it is next player's turn");
+            return false;
+        }
+        return player.addNumber(guess);
     }
 
     private boolean isGuessed(Player player) {
@@ -80,9 +81,10 @@ public class GuessNumber {
         return false;
     }
 
-    private void returnSuccessMessage(Player player) {
+    private void printSuccessMessage(Player player) {
+        player.addCountAttempts();
         System.out.printf("Игрок %s угадал число %d с %d попытки\n",
-                player.getName(), secretNumber, player.getCountAttempts());
+                player.getName(), secretNumber, player.getCountAttempts() + 1);
     }
 
     private void printPlayerNumbers(Player player) {

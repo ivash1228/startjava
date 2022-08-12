@@ -6,14 +6,14 @@ public class GuessNumberTest {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("First player name:");
-        Player playerOne = new Player(scanner.next());
-        System.out.println("Second player name:");
-        Player playerTwo = new Player(scanner.next());
-        System.out.println("Third player name:");
-        Player playerThree = new Player(scanner.next());
-        GuessNumber game = new GuessNumber(playerOne, playerTwo, playerThree);
-        game.assignOrder();
+        Player[] players = new Player[3];
+        for(int i = 0; i < 3; i++) {
+            System.out.println("Put "+ (i + 1) +  " player name:");
+            players[i] = new Player(scanner.next());
+        }
+
+        GuessNumber game = new GuessNumber(players);
+
         String answer = "yes";
         do {
             if (answer.equals("yes")) {
