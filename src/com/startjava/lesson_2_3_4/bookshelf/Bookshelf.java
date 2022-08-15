@@ -1,7 +1,6 @@
 package com.startjava.lesson_2_3_4.bookshelf;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Bookshelf {
 
@@ -17,13 +16,22 @@ public class Bookshelf {
         countBooks++;
     }
 
-    public void giveawayBook(Book book) {
+
+    public Book search(String title) {
+        for(int i = 0; i < countBooks; i++) {
+            if (books[i].getTitle().equals(title)) {
+                System.out.println("Here is your book: " + books[i]);
+                return books[i];
+            }
+        }
+        System.out.println("Book is not on the shelf");
+        return null;
+    }
+
+    public void removeBook(String title) {
         boolean bookFound = false;
-        for(int i = 0; i < books.length; i++) {
-            if (books[i] == null
-                    || (books[i].getAuthor().equals(book.getAuthor())
-                    && books[i].getTitle().equals(book.getTitle())
-                    && books[i].getYear().equals(book.getYear()))) {
+        for(int i = 0; i < countBooks; i++) {
+            if (books[i].getTitle().equals(title)) {
                 moveBooks(i);
                 bookFound = true;
                 break;
@@ -35,7 +43,7 @@ public class Bookshelf {
     private void moveBooks(int position) {
         books[position] = null;
         int counter = 0;
-        for(int i = position + 1; i < books.length; i++) {
+        for (int i = position + 1; i < books.length; i++) {
             if (books[i] != null) {
                 counter++;
             } else break;
@@ -47,23 +55,27 @@ public class Bookshelf {
         }
 
     public void clearShelf() {
-        for (int i = 0; i < books.length; i++) {
+        for (int i = 0; i < countBooks; i++) {
             books[i] = null;
-            if(books[i] == null) {
-                break;
-            }
         }
+        countBooks = 0;
     }
 
-    public void showBooksQuantity() {
-        System.out.println("There are " + countBooks + " on the shelf");
+    public int getBooksQuantity() {
+        return countBooks;
     }
 
-    public void showFreeSpace() {
-        System.out.println("There are " + (books.length - countBooks) + "spaces left");
+    public int getFreeSpace() {
+        return books.length - countBooks;
     }
 
     public Book[] getAllBooks() {
         return Arrays.copyOf(books, books.length);
+    }
+
+    public void showAll() {
+        for (int i = 0; i < countBooks; i++) {
+            System.out.println(books[i]);
+        }
     }
 }

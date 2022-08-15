@@ -7,7 +7,7 @@ public class GuessNumberTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Player[] players = new Player[3];
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < players.length; i++) {
             System.out.println("Put "+ (i + 1) +  " player name:");
             players[i] = new Player(scanner.next());
         }

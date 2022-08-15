@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class GuessNumber {
 
-    public Player[] players;
+    private Player[] players;
     private int secretNumber;
 
     public GuessNumber(Player[] players) {
@@ -14,47 +14,25 @@ public class GuessNumber {
 
     public void start(Scanner scanner) {
         generateSecretNumber();
-        assignOrder();
+        castLots();
         System.out.println("у каждого игрока по 10 попыток");
 
-        boolean isGuessed = false;
-        while (hasAttempts() && !isGuessed) {
+        boolean guessed = false;
+        while (hasAttempts() && !guessed) {
             for (int i = 0; i < players.length; i++) {
-                if (inputNumber(players[i], scanner)) {
-                    if (isGuessed(players[i])) {
-                        isGuessed = true;
-                        printSuccessMessage(players[i]);
-                        break;
-                    }
-                } players[i].addCountAttempts();
+                guessed = makeMove(players[i], scanner);
+                if (guessed) break;
             }
         }
         for (Player player : players) {
-            if(player.getCountAttempts() == 9 && !isGuessed) {
+            if (player.getCountAttempts() == 9) {
                 System.out.printf("У %s закончились попытки\n", player.getName());
-                isGuessed = true;
+                break;
             }
-            printPlayerNumbers(player);
-            player.resetNumbers();
         }
-    }
-
-    public boolean hasAttempts() {
+        printPlayersNumbers();
         for (Player player : players) {
-            if (player.getCountAttempts() > 9) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void assignOrder() {
-        Random r = new Random();
-        for (int i = players.length - 1; i > 0; i--) {
-            int j = r.nextInt(i+1);
-            Player temp = players[i];
-            players[i] = players[j];
-            players[j] = temp;
+            player.clear();
         }
     }
 
@@ -62,13 +40,37 @@ public class GuessNumber {
         secretNumber = new Random().nextInt(10) + 1;
     }
 
+    private void castLots() {
+        Random r = new Random();
+        for (int i = players.length - 1; i > 0; i--) {
+            int j = r.nextInt(i + 1);
+            Player temp = players[i];
+            players[i] = players[j];
+            players[j] = temp;
+        }
+    }
+
+    private boolean hasAttempts() {
+        for (Player player : players) {
+            if (player.getCountAttempts() > 8) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean makeMove(Player player, Scanner scanner) {
+        if(inputNumber(player, scanner)) {
+            if (isGuessed(player)) {
+                printSuccessMessage(player);
+                return true;
+            }
+        } return false;
+    }
+
     private boolean inputNumber(Player player, Scanner scanner) {
         System.out.println(player.getName() + ", put your number: ");
         int guess = scanner.nextInt();
-        if (guess > 100 || guess < 0 ) {
-            System.out.println("You put invalid number, now it is next player's turn");
-            return false;
-        }
         return player.addNumber(guess);
     }
 
@@ -82,15 +84,17 @@ public class GuessNumber {
     }
 
     private void printSuccessMessage(Player player) {
-        player.addCountAttempts();
         System.out.printf("Игрок %s угадал число %d с %d попытки\n",
-                player.getName(), secretNumber, player.getCountAttempts() + 1);
+                player.getName(), secretNumber, player.getCountAttempts() + 1 );
     }
 
-    private void printPlayerNumbers(Player player) {
-        for (int number : player.getNumbers()) {
-            System.out.print(number + " ");
+    private void printPlayersNumbers() {
+        for (Player player: players) {
+            System.out.print(player.getName() + " numbers are: ");
+            for (int number : player.getNumbers()) {
+                System.out.print(number + " ");
+            }
+            System.out.println();
         }
-        System.out.println();
     }
 }
