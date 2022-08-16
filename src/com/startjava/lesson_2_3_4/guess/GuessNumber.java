@@ -21,13 +21,10 @@ public class GuessNumber {
         while (hasAttempts() && !guessed) {
             for (int i = 0; i < players.length; i++) {
                 guessed = makeMove(players[i], scanner);
+                if (players[i].getCountAttempts() == 9) {
+                    System.out.printf("У %s закончились попытки\n", players[i].getName());
+                }
                 if (guessed) break;
-            }
-        }
-        for (Player player : players) {
-            if (player.getCountAttempts() == 9) {
-                System.out.printf("У %s закончились попытки\n", player.getName());
-                break;
             }
         }
         printPlayersNumbers();
@@ -37,7 +34,7 @@ public class GuessNumber {
     }
 
     private void generateSecretNumber() {
-        secretNumber = new Random().nextInt(10) + 1;
+        secretNumber = new Random().nextInt(100) + 1;
     }
 
     private void castLots() {
@@ -51,12 +48,13 @@ public class GuessNumber {
     }
 
     private boolean hasAttempts() {
+        int counter = 0;
         for (Player player : players) {
             if (player.getCountAttempts() > 8) {
-                return false;
+                counter++;
             }
         }
-        return true;
+        return (counter < 3) ? true : false;
     }
 
     private boolean makeMove(Player player, Scanner scanner) {
