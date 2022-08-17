@@ -7,6 +7,7 @@ public class GuessNumber {
 
     private Player[] players;
     private int secretNumber;
+    private int MAXATTEMPTS = 10;
 
     public GuessNumber(Player[] players) {
         this.players = players;
@@ -21,7 +22,7 @@ public class GuessNumber {
         while (hasAttempts() && !guessed) {
             for (int i = 0; i < players.length; i++) {
                 guessed = makeMove(players[i], scanner);
-                if (players[i].getCountAttempts() == 9) {
+                if (!guessed && players[i].getCountAttempts() == MAXATTEMPTS) {
                     System.out.printf("У %s закончились попытки\n", players[i].getName());
                 }
                 if (guessed) break;
@@ -50,11 +51,11 @@ public class GuessNumber {
     private boolean hasAttempts() {
         int counter = 0;
         for (Player player : players) {
-            if (player.getCountAttempts() > 8) {
+            if (player.getCountAttempts() == MAXATTEMPTS) {
                 counter++;
             }
         }
-        return (counter < 3) ? true : false;
+        return (counter < players.length) ? true : false;
     }
 
     private boolean makeMove(Player player, Scanner scanner) {
@@ -83,7 +84,7 @@ public class GuessNumber {
 
     private void printSuccessMessage(Player player) {
         System.out.printf("Игрок %s угадал число %d с %d попытки\n",
-                player.getName(), secretNumber, player.getCountAttempts() + 1 );
+                player.getName(), secretNumber, player.getCountAttempts());
     }
 
     private void printPlayersNumbers() {

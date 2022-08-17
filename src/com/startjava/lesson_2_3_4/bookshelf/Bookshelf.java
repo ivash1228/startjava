@@ -11,21 +11,22 @@ public class Bookshelf {
         books = new Book[10];
     }
 
-    public void addBook(Book book) {
-        books[countBooks] = book;
-        countBooks++;
+    public boolean addBook(Book book) {
+        if (getFreeSpace() > 0) {
+            books[countBooks] = book;
+            countBooks++;
+            return true;
+        }
+        return false;
     }
 
-
-    public Book search(String title) {
+    public String findBook(String title) {
         for(int i = 0; i < countBooks; i++) {
             if (books[i].getTitle().equals(title)) {
-                System.out.println("Here is your book: " + books[i]);
-                return books[i];
+                return books[i].getAuthor() + " " + books[i].getTitle() + " " + books[i].getYear();
             }
         }
-        System.out.println("Book is not on the shelf");
-        return null;
+        return "Book not found";
     }
 
     public void removeBook(String title) {
@@ -41,17 +42,9 @@ public class Bookshelf {
     }
 
     private void moveBooks(int position) {
-        books[position] = null;
-        int counter = 0;
-        for (int i = position + 1; i < books.length; i++) {
-            if (books[i] != null) {
-                counter++;
-            } else break;
-            System.arraycopy(books, position + 1, books, position, counter);
-            books[counter + 1] = null;
-            countBooks--;
-            counter = 0;
-            }
+        System.arraycopy(books, position + 1, books, position, countBooks - position - 1);
+        countBooks--;
+        books[countBooks] = null;
         }
 
     public void clearShelf() {
@@ -71,11 +64,5 @@ public class Bookshelf {
 
     public Book[] getAllBooks() {
         return Arrays.copyOf(books, books.length);
-    }
-
-    public void showAll() {
-        for (int i = 0; i < countBooks; i++) {
-            System.out.println(books[i]);
-        }
     }
 }
