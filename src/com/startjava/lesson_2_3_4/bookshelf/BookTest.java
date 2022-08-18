@@ -55,7 +55,7 @@ public class BookTest {
             case 3 -> System.out.println(bookshelf.findBook(inputTitle()));
             case 4 -> System.out.println("Books on the shelf: " + bookshelf.getBooksQuantity());
             case 5 -> System.out.println("Free spots: " + bookshelf.getFreeSpace());
-            case 6 -> System.out.println(bookshelf.getAllBooks());
+            case 6 -> printAll(bookshelf.getAllBooks());
             case 7 -> bookshelf.clearShelf();
             case 8 -> System.exit(0);
         }
@@ -88,5 +88,14 @@ public class BookTest {
             year = scanner.next().trim();
         }
         return year;
+    }
+
+    private static void printAll(Book[] allBooks) {
+        for (Book book : allBooks) {
+            if (book == null) {
+                break;
+            }
+            System.out.println(book);
+        }
     }
 }
