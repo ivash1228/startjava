@@ -55,7 +55,7 @@ public class GuessNumber {
                 counter++;
             }
         }
-        return (counter < players.length) ? true : false;
+        return counter < players.length;
     }
 
     private boolean makeMove(Player player, Scanner scanner) {
